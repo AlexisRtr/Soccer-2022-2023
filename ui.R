@@ -16,10 +16,13 @@ sidebar <- dashboardSidebar(
 body <- dashboardBody(
   tabItems(
     tabItem(tabName = "dataset",
-            fluidRow(
-              h2("The dataset from ..."),
-              DT::dataTableOutput("goals_table")
-            )),
+            
+            # fluidRow(
+            #   h2("The dataset from ..."),
+            #   # DT::dataTableOutput("goals_table")
+            #   tableOutput("goals_table")
+            # )
+    ),
     
     tabItem(tabName = "goals",
             fluidRow(
@@ -34,16 +37,52 @@ body <- dashboardBody(
 
               ),
               column(width = 9,
-                     box(title = "Difference between expect goals VS reality", width = 4.5,
-                         plotOutput("plot1", click = "plot_click"),
-                         # verbatimTextOutput("input_country")
+                     box(title = "Goal difference (GD) between expect goals VS reality", width = 4,
+                         plotOutput("plot_xG_realG", click = "plot_click")
                          ),
-                     box(title = "Difference xG VS G (defense/forward)", width = 4)
+                     box(title = "Goal scored (GF) between expect goals VS reality", width = 4,
+                         plotOutput("plot_xGF_realG", click = "plot_click")
+                     ),
+                     box(title = "Goal against (GA) between expect goals VS reality", width = 4,
+                         plotOutput("plot_xGA_realG", click = "plot_click")
+                     )
+              )
+            ),
+            fluidRow(
+              column(width = 2,
+              ),
+              column(width = 9,
+                     box(title = "Teams with best/worst goals difference (GD)", width = 4,
+                         tableOutput('top_diff_GD_team'),
+                         tableOutput('worst_diff_GD_team')
+                     ),
+                     box(title = "Teams which over/under scored goals for (GF)", width = 4,
+                         tableOutput('top_diff_GF_team'),
+                         tableOutput('worst_diff_GF_team')
+                     ),
+                     box(title = "Teams which over/under score against (GA)", width = 4,
+                         tableOutput('top_diff_GA_team'),
+                         tableOutput('worst_diff_GA_team')
+                     )
+              )
+            ),
+            
+            fluidRow(
+              column(width = 2,
+              ),
+              column(width = 9,
+                     box(title = "Evolution of the xGoal difference with the ranking", width = 4,
+                         plotOutput("plot_xG_ranking", click = "plot_click")),
+                     box(title = "Evolution of the xGoal difference with the ranking", width = 4,
+                         plotOutput("plot_xGF_ranking", click = "plot_click")),
+                     box(title = "Evolution of the xGoal difference with the ranking", width = 4,
+                         plotOutput("plot_xGA_ranking", click = "plot_click")
+                     )
               )
             )
+            
     )
   )
-  
 )
 
 
