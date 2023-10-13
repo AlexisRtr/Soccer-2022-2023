@@ -11,8 +11,7 @@ server <- function(input, output, session) {
     data_goals
   })
   
-  #### Plots
-  
+  #### PLOTS
   output$plot_xG_realG <- renderPlot({
     req(input$input.country)
     temp <- data_goals %>% filter(Country %in% input$input.country) 
@@ -82,6 +81,8 @@ server <- function(input, output, session) {
     violin_plot(df = data, var.x = "Country", var.y = "xGD_90")
   })
   
+  
+  #### RANKING OF THE TOP TEAM
   output$top_diff_GF_team <- renderTable({
     req(input$input.country)
     temp <- data_goals %>% filter(Country %in% input$input.country) 
@@ -112,7 +113,7 @@ server <- function(input, output, session) {
     temp %>% select(Squad, Country, LgRk, diff_GD) %>%  top_n(5,diff_GD) %>% arrange(desc(diff_GD))
   })
   
-  
+  #### RANKING OF THE WORST TEAM 
   output$worst_diff_GF_team <- renderTable({
     req(input$input.country)
     temp <- data_goals %>% filter(Country %in% input$input.country) 
