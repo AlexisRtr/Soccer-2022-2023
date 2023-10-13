@@ -1,6 +1,8 @@
 # Soccer-2022-2023
 
-Project on analysis between expected goals and real goals during the season 2022-2023 in the 5 Europeans championaship (England, Germany, Spain, Italy, France) .
+Project on analysis between expected goals and real goals during the season 2022-2023 in the 5 Europeans championaship (England, Germany, Spain, Italy, France).
+
+App available [Go to app](https://datasciencear.shinyapps.io/soccer-2022-2023/)
 
 Tab Expected goals vs reality: 
 - visualizing graphs for the xGoals difference and Goals difference
