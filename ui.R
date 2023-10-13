@@ -71,11 +71,11 @@ body <- dashboardBody(
               column(width = 2,
               ),
               column(width = 9,
-                     box(title = "Evolution of the xGoal difference with the ranking", width = 4,
+                     box(title = "Evolution of the xGoal difference (GD) with the ranking", width = 4,
                          plotOutput("plot_xG_ranking", click = "plot_click")),
-                     box(title = "Evolution of the xGoal difference with the ranking", width = 4,
+                     box(title = "Evolution of the xGoal for (GF) with the ranking", width = 4,
                          plotOutput("plot_xGF_ranking", click = "plot_click")),
-                     box(title = "Evolution of the xGoal difference with the ranking", width = 4,
+                     box(title = "Evolution of the xGoal against (GA) with the ranking", width = 4,
                          plotOutput("plot_xGA_ranking", click = "plot_click")
                      )
               )
