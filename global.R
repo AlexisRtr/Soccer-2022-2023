@@ -2,7 +2,6 @@ library(shinydashboard)
 library(shiny)
 library(ggplot2)
 
-
 linear_reg <- function(df, var.x, var.y, group, name){
   print("Linear graph EXE")
   

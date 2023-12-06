@@ -28,4 +28,4 @@ data <- data %>% mutate(GF_90 = GF/MP,
                         )
 data_goals <- data %>% select(Squad,Country,LgRk,GF_90,xGF_90,diff_GF,GA_90,xGA_90,diff_GA,GD_90,xGD_90,diff_GD)
 
-# write.csv(x = data_goals,file = "data/df_goals.csv")
+write.csv(x = data_goals,file = "data/df_goals.csv", row.names = F)

@@ -4,13 +4,25 @@ server <- function(input, output, session) {
   
   
   #### Dataset
-  # output$goals_table = DT::renderDataTable({
-  #   data_goals
-  # })
+  output$table_goal <- renderDataTable(
+    data <- read.csv2("data/2021_2022_stats.csv"),
+    data,
+    options = list(
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
   
-  output$goals_table = renderDataTable({
-    data_goals
-  })
+  output$table_goal_processed <- renderDataTable(
+    data <- read.csv("data/df_goals.csv"),
+    data,
+    options = list(
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+  
+  
   
   #### PLOTS
   output$plot_xG_realG <- renderPlot({

@@ -3,12 +3,14 @@ source("Prepocessing_teams.R")
 
 
 header <- dashboardHeader(
+  
   title = "Dashboard Soccer 2021-2021"
 )
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem(text = "Dataset", tabName = "dataset", icon = icon("chart-area")),
+    menuItem(text = "Dataset processed", tabName = "dataset_processed", icon = icon("chart-area")),
     menuItem(text = "Expected goals vs reality", tabName = "goals", icon = icon("chart-area"))
   )
 )
@@ -16,12 +18,24 @@ sidebar <- dashboardSidebar(
 body <- dashboardBody(
   tabItems(
     tabItem(tabName = "dataset",
-            
-            # fluidRow(
-            #   h2("The dataset from ..."),
-            #   # DT::dataTableOutput("goals_table")
-            #   tableOutput("goals_table")
-            # )
+            fluidRow(
+              h2("The dataset from ..."),
+              # DT::dataTableOutput("goals_table")
+              column(
+                dataTableOutput(outputId = "table_goal"), width = 12
+              )
+            )
+    ),
+    
+    tabItem(tabName = "dataset_processed",
+            fluidRow(
+              h2("The dataset is processed with results with expected goals and goals calculated per game:"),
+              # DT::dataTableOutput("goals_table")
+              column(
+                dataTableOutput(outputId = "table_goal_processed"), 
+                width = 12
+              )
+            )
     ),
     
     tabItem(tabName = "goals",
