@@ -46,7 +46,7 @@ body <- dashboardBody(
                                             choiceNames =  unique(data_goals$Country),
                                             choiceValues = unique(data_goals$Country),
                                             selected = unique(data_goals$Country)),
-                         submitButton("Graph")
+                         submitButton("Display graph")
                      ),
 
               ),
