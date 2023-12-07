@@ -55,6 +55,7 @@ violin_plot <- function(df, var.x, var.y){
       width = 1000,
       height = 800)
   dev.off()
+  return(g)
 }
 
 

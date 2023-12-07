@@ -1,11 +1,13 @@
 ---
 title: "Report dataviz"
-output: html
+output:
+  html: html_document
 date: "2023-12-07"
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
 ```
 
 ## Import dataset
@@ -13,20 +15,20 @@ Dataset from Kaggle
 
 ```{r cars}
 data <- read.csv2("data/2021_2022_stats.csv")
-head(data)
+knitr::kable(head(data))
 ```
 
 ## Preprocessing
 
 Some steps to preprocess the data.
 
-```{r  }
+```{r  echo=FALSE}
 #### Check dataset
-sapply(data, class)
-names(data)
-summary(data)
-head(data)
-sum(is.na(data))
+# sapply(data, class)
+# names(data)
+# summary(data)
+# head(data)
+# sum(is.na(data))
 
 data[,4:18] <- sapply(data[,4:18],as.numeric)
 ```
@@ -35,7 +37,7 @@ data[,4:18] <- sapply(data[,4:18],as.numeric)
 ## Normalization of expected goals
 
 The expected goals are calculated for each game.
-```{r  }
+```{r  echo=FALSE}
 #### Add columns
 data <- data %>% mutate(GF_90 = GF/MP,
                         xGF_90 = xG/MP,
@@ -50,13 +52,34 @@ data <- data %>% mutate(GF_90 = GF/MP,
 
 ```
 
-```{r  }
+```{r  echo=FALSE}
 data_goals <- data %>% select(Squad,Country,LgRk,GF_90,xGF_90,diff_GF,GA_90,xGA_90,diff_GA,GD_90,xGD_90,diff_GD)
+```
 
+
+```{r  }
+knitr::kable(head(data_goals))
+```
+
+Exporting the table data_goals to "data/df_goals.csv"
+```{r }
 write.csv(x = data_goals,file = "data/df_goals.csv", row.names = F)
 ```
 
 
-```{r  }
-head(data_goals)
+## Graphs
+
+```{r  echo=FALSE, warning=FALSE, message=FALSE}
+source('global.R')
 ```
+
+```{r violin-plot, dev='png', fig.show='hide',echo=FALSE,warning=FALSE,message=FALSE}
+temp <- data_goals %>% filter(Country=='ENG')
+linear_reg_without_line(df = temp,
+                            var.x = "GF_90",
+                            var.y = "xGF_90",
+                            group =  "Country",
+                            name = "_App")
+```
+
+![Fig 1: Regression between the expected goals (y) and the goals (x) scored ](`r knitr::fig_chunk('violin-plot', 'png')`)
